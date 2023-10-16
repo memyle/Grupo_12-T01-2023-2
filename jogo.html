@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="jogo.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="jogo.css">
+    <title>Jogo</title>
+</head>
+<body>
+    <header class="purple-bg">
+        <nav>
+            <ul>
+                <li><select id="menuDropdown">
+                    <option value="" disabled selected>Escolha uma opção</option>
+                    <option value="Miojo">Miojo</option>
+                    <option value="Série">Série</option>
+                    <option value="Filmes">Filmes</option>
+                </select>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="login.html">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="ranking">
+                <h1> RANKING </h1>
+                <h2 id="opcaoSelecionada"><h2>
+                <div class="ranking-item">
+                    <span>1º</span>
+                    <img src="imagem1.jpg" alt="Imagem 1">
+                    <span>Nome 1</span>
+                </div>
+                <div class="ranking-item">
+                    <span>2º</span>
+                    <img src="imagem2.jpg" alt="Imagem 2">
+                    <span>Nome 2</span>
+                </div>
+                <div class="ranking-item">
+                    <span>3º  </span>
+
+                    <img src="imagem3.jpg" alt="Imagem 3">
+                    <span>Nome 3</span>
+                </div>
+            </div>
+        </div>
+            <div class="container2">
+                <div class="prompt">
+                    <p><b>Esse ou aquele?</p></b>
+                </div>
+                <div class="images">
+                    <img id="imagem1" src="imagem1.jpg" alt="Imagem 1" class="image" onclick="trocarImagens()">
+                    <div class="circle">OU</div>
+                    <img id="imagem2" src="imagem2.jpg" alt="Imagem 2" class="image" onclick="trocarImagens()">
+
+                </div>
+        </div>
+    </div>
+</body>
+</html>
