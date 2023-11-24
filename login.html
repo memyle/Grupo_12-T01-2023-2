@@ -17,13 +17,77 @@
         </nav>
     </header>
     <div>
-        <input type="text" placeholder="Nome">
+        <input type="text" placeholder="Nome" id="email">
         <br><br>
-        <input type="password" placeholder="Senha">
+        <input type="password" placeholder="Senha" id="password">
         <br><br>
         <p type="texto"> Não possui conta? <a type: "link" href=cadastro.html>Clique aqui para cadastrar.</a></p>
-        <button id="loginButton" onclick="redirecionarParaJogo()"><b>ENTRAR</button></b>
+        <button id="loginButton"><b>ENTRAR</button></b>
     </div>
-    <script src="login.js"></script>
 </body>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+    import { getDatabase , set , update,  ref} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBHRPQdqnqe1oR6UlrB65giAicJLGtUR5Q",
+      authDomain: "progweb20232.firebaseapp.com",
+      databaseURL: "https://progweb20232-default-rtdb.firebaseio.com",
+      projectId: "progweb20232",
+      storageBucket: "progweb20232.appspot.com",
+      messagingSenderId: "578761242558",
+      appId: "1:578761242558:web:107d6c1be2c168a674abef"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    loginButton.addEventListener('click', (e) => {
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        //var username = document.getElementById('nomeCompleto').value;
+
+
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            const dt = new Date();
+            update(ref(database,'users/' + user.uid),{
+                last_login: dt
+            }
+                        
+            )
+            alert('Usuário logado com sucesso!');
+            window.location.href = 'jogo.html';
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            alert('errorMessage');
+        });
+    });  
+    const user = auth.currentUser;
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/auth.user
+          const uid = user.uid;
+          
+          // ...
+        } else {
+          // User is signed out
+          // ...
+        }
+      });
+</script>
 </html>
